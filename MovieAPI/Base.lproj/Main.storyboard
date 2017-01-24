@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -653,16 +657,188 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MovieAPI" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
         <!--Window Controller-->
+        <scene sceneID="Nds-XZ-aHW">
+            <objects>
+                <windowController storyboardIdentifier="DetailWindow" id="gO2-tx-mhs" sceneMemberID="viewController">
+                    <window key="window" title="Movie Detail" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="NMh-qQ-dUO">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="241" width="501" height="269"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                    </window>
+                    <connections>
+                        <segue destination="ygs-an-Yfi" kind="relationship" relationship="window.shadowedContentViewController" id="noq-9O-Zd8"/>
+                    </connections>
+                </windowController>
+                <customObject id="oCg-W5-L4v" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="676.5" y="106.5"/>
+        </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="lAJ-6C-4xd">
+            <objects>
+                <viewController id="ygs-an-Yfi" customClass="MovieDetailViewController" customModule="MovieAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="KDx-Xk-uLY">
+                        <rect key="frame" x="0.0" y="0.0" width="780" height="479"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nVi-uz-wrY">
+                                <rect key="frame" x="0.0" y="0.0" width="780" height="479"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="bdC-zH-fWh"/>
+                            </imageView>
+                            <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="fDN-gV-erp">
+                                <rect key="frame" x="-3" y="-4" width="786" height="485"/>
+                                <view key="contentView" id="Nye-CC-82G">
+                                    <rect key="frame" x="1" y="1" width="784" height="483"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ULJ-5Y-uvY">
+                                            <rect key="frame" x="10" y="113" width="240" height="360"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="240" id="HY9-5c-CdH"/>
+                                                <constraint firstAttribute="height" constant="360" id="SBI-uN-nZs"/>
+                                            </constraints>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="06d-6H-4QI"/>
+                                            <connections>
+                                                <binding destination="ygs-an-Yfi" name="hidden" keyPath="self.isHiding" id="o8U-BC-TuW"/>
+                                            </connections>
+                                        </imageView>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aVb-Ws-Y94">
+                                            <rect key="frame" x="270" y="324" width="89" height="149"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="746" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="840-TU-ChP">
+                                                    <rect key="frame" x="-2" y="90" width="93" height="59"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" placeholderString="" id="Lqk-Kp-gvA">
+                                                        <font key="font" size="35" name="AvenirNext-DemiBold"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="ygs-an-Yfi" name="value" keyPath="self.movieTitle" id="Xyl-g7-lAa"/>
+                                                    </connections>
+                                                </textField>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vud-Il-6av">
+                                                    <rect key="frame" x="-2" y="60" width="42" height="25"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" placeholderString="" id="e8W-mN-oS4">
+                                                        <font key="font" size="15" name="AvenirNext-Regular"/>
+                                                        <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="ygs-an-Yfi" name="value" keyPath="self.movieReleaseDate" id="hcv-nK-jdI"/>
+                                                    </connections>
+                                                </textField>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNV-wl-Zoj">
+                                                    <rect key="frame" x="-2" y="30" width="42" height="25"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="ycA-Ci-0WQ">
+                                                        <font key="font" size="15" name="AvenirNext-Regular"/>
+                                                        <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="ygs-an-Yfi" name="value" keyPath="self.movieGenres" id="pcc-Io-Pc3"/>
+                                                    </connections>
+                                                </textField>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Lh-mt-QKq" customClass="HyperlinkTextField" customModule="MovieAPI" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="0.0" width="42" height="25"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="Label" allowsEditingTextAttributes="YES" id="knS-L8-eE0">
+                                                        <font key="font" size="15" name="AvenirNext-Regular"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                            <connections>
+                                                <binding destination="ygs-an-Yfi" name="hidden" keyPath="self.isHiding" id="Ksk-7s-uc5"/>
+                                            </connections>
+                                        </stackView>
+                                        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="h6Y-ZI-DlF">
+                                            <rect key="frame" x="377" y="226" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="WgD-lN-bg3"/>
+                                                <constraint firstAttribute="height" constant="30" id="fgb-QB-toT"/>
+                                            </constraints>
+                                            <connections>
+                                                <binding destination="ygs-an-Yfi" name="hidden" keyPath="self.isHiding" id="mYz-mB-itY">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </progressIndicator>
+                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xCA-RD-ttB">
+                                            <rect key="frame" x="268" y="285" width="488" height="31"/>
+                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Multiline Label" id="pKA-hT-P6E">
+                                                <font key="font" size="18" name="AvenirNext-Medium"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="ygs-an-Yfi" name="hidden" keyPath="self.isHiding" id="BKE-Gw-ZKd"/>
+                                                <binding destination="ygs-an-Yfi" name="value" keyPath="self.movieOverview" id="Xmz-lU-STb"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="h6Y-ZI-DlF" firstAttribute="centerY" secondItem="Nye-CC-82G" secondAttribute="centerY" id="3Tt-Nv-JBN"/>
+                                        <constraint firstItem="xCA-RD-ttB" firstAttribute="top" secondItem="aVb-Ws-Y94" secondAttribute="bottom" constant="8" id="3gm-M1-qkx"/>
+                                        <constraint firstAttribute="trailing" secondItem="xCA-RD-ttB" secondAttribute="trailing" constant="30" id="GJ2-tA-kEz"/>
+                                        <constraint firstItem="xCA-RD-ttB" firstAttribute="leading" secondItem="aVb-Ws-Y94" secondAttribute="leading" id="PQE-uu-VfL"/>
+                                        <constraint firstItem="ULJ-5Y-uvY" firstAttribute="top" secondItem="Nye-CC-82G" secondAttribute="top" constant="10" id="RWE-Lt-tab"/>
+                                        <constraint firstItem="aVb-Ws-Y94" firstAttribute="top" secondItem="ULJ-5Y-uvY" secondAttribute="top" id="TG8-A0-pZQ"/>
+                                        <constraint firstItem="ULJ-5Y-uvY" firstAttribute="leading" secondItem="Nye-CC-82G" secondAttribute="leading" constant="10" id="ehJ-kD-blD"/>
+                                        <constraint firstItem="aVb-Ws-Y94" firstAttribute="leading" secondItem="ULJ-5Y-uvY" secondAttribute="trailing" constant="20" id="keQ-Z4-gfQ"/>
+                                        <constraint firstItem="h6Y-ZI-DlF" firstAttribute="centerX" secondItem="Nye-CC-82G" secondAttribute="centerX" id="lqQ-rX-VsB"/>
+                                    </constraints>
+                                </view>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fDN-gV-erp" secondAttribute="bottom" id="34s-jO-kRr"/>
+                            <constraint firstItem="fDN-gV-erp" firstAttribute="top" secondItem="KDx-Xk-uLY" secondAttribute="top" id="LJG-vx-S1W"/>
+                            <constraint firstItem="fDN-gV-erp" firstAttribute="leading" secondItem="KDx-Xk-uLY" secondAttribute="leading" id="OQu-cE-FfM"/>
+                            <constraint firstAttribute="trailing" secondItem="nVi-uz-wrY" secondAttribute="trailing" id="Y0N-aT-hi3"/>
+                            <constraint firstItem="nVi-uz-wrY" firstAttribute="leading" secondItem="KDx-Xk-uLY" secondAttribute="leading" id="iw4-58-3wM"/>
+                            <constraint firstAttribute="bottom" secondItem="nVi-uz-wrY" secondAttribute="bottom" id="kBF-Wy-hW3"/>
+                            <constraint firstAttribute="trailing" secondItem="fDN-gV-erp" secondAttribute="trailing" id="ngn-ET-dyc"/>
+                            <constraint firstItem="nVi-uz-wrY" firstAttribute="top" secondItem="KDx-Xk-uLY" secondAttribute="top" id="o4L-Jt-cRW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="nVi-uz-wrY" id="cic-n8-6UW"/>
+                        <outlet property="customView" destination="Nye-CC-82G" id="1bd-qE-atj"/>
+                        <outlet property="homePageLabel" destination="9Lh-mt-QKq" id="EH9-ar-SqI"/>
+                        <outlet property="posterImageView" destination="ULJ-5Y-uvY" id="xfC-gR-NO8"/>
+                        <outlet property="progressView" destination="h6Y-ZI-DlF" id="09U-oH-2FA"/>
+                    </connections>
+                </viewController>
+                <customObject id="RAI-j1-2w8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="459" y="883"/>
+        </scene>
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Movies" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -674,20 +850,61 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="-75" y="235"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="MovieAPI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="671" height="429"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBM-cv-Emb">
+                                <rect key="frame" x="0.0" y="0.0" width="671" height="429"/>
+                                <clipView key="contentView" drawsBackground="NO" id="sCa-3m-m14">
+                                    <rect key="frame" x="1" y="1" width="669" height="427"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView id="ajJ-zX-YFn">
+                                            <rect key="frame" x="0.0" y="0.0" width="669" height="427"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="WMY-fp-Bxf">
+                                                <size key="itemSize" width="50" height="50"/>
+                                            </collectionViewFlowLayout>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="XfG-lQ-9wD" id="hEd-8Q-oYS"/>
+                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="2Iw-WO-7en"/>
+                                            </connections>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="euY-Q3-brY">
+                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="2cC-bi-Net">
+                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="UBM-cv-Emb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="42j-pZ-nHZ"/>
+                            <constraint firstAttribute="bottom" secondItem="UBM-cv-Emb" secondAttribute="bottom" id="PFz-Q2-Jft"/>
+                            <constraint firstItem="UBM-cv-Emb" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="qHC-C7-BBB"/>
+                            <constraint firstAttribute="trailing" secondItem="UBM-cv-Emb" secondAttribute="trailing" id="rEW-zl-5CL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="ajJ-zX-YFn" id="bFa-0P-ueQ"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-61" y="767"/>
         </scene>
     </scenes>
 </document>
