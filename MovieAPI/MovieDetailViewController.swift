@@ -16,7 +16,10 @@ class MovieDetailViewController: NSViewController {
     @IBOutlet weak var backgroundImageView: NSImageView!
     @IBOutlet weak var posterImageView: NSImageView!
     @IBOutlet weak var progressView: NSProgressIndicator!
-    @IBOutlet weak var homePageLabel: NSTextField!
+    @IBOutlet weak var ratingLevelIndicator: NSLevelIndicator!
+    @IBOutlet weak var homePageLabel: HyperlinkTextField!
+    
+    dynamic var ratingValue = NSNumber()
     
     // MARK: - Properties
     var movieDetail: TMDBMovieDetail?
@@ -26,7 +29,10 @@ class MovieDetailViewController: NSViewController {
     dynamic var movieGenres: String?
     dynamic var movieHomePage: String?
     dynamic var movieReleaseDate: String?
+    dynamic var movieVoteCount: NSNumber?
+    dynamic var customFont: NSFont?
     dynamic var isHiding = true
+    dynamic var homePageLabelHidding = false
     dynamic var cadmiumOrangeColor = NSColor.cadmiumOrange
     
     // New selected Movie
@@ -40,13 +46,13 @@ class MovieDetailViewController: NSViewController {
         }
     }
     
-    
+   
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customView.wantsLayer = true
-        customView.layer?.backgroundColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.80).cgColor
+        customView.layer?.backgroundColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.7).cgColor
         
         // Make subviews background no transparent
         _ = view.subviews.map {
@@ -57,6 +63,10 @@ class MovieDetailViewController: NSViewController {
             ($0 as? NSImageView)?.wantsLayer = true
             ($0 as? NSImageView)?.alphaValue = 0.8
         }
+        
+        // Make MovieDetailViewController Delegate to Homepagelabel to handle homepage URLS
+        self.homePageLabel.clickableTextFieldDelegate = self
+        
     }
     
     // MARK: - View Life Cycle
@@ -83,7 +93,7 @@ extension MovieDetailViewController {
     func getMovieDetail(_ movieID: NSNumber) {
         
         let baseURLString = API.APIbaseURL.appending(Path.detail.rawValue.replacingOccurrences(of: "{movie_id}", with: "\(movieID)"))
-        let parameters = ["api_key": API.key, "language":movieLanguage.fr] as [String : Any]
+        let parameters = ["api_key": API.key, "language":movieLanguage.en] as [String : Any]
         
         guard let url = URLComponents.urlWithParameters(baseURLString, parameters) else {
             debugPrint("Invalid Movie Detail URL")
@@ -103,7 +113,7 @@ extension MovieDetailViewController {
     
     // Update View
     fileprivate func updatView(_ movie: TMDBMovieDetail) {
-        debugPrint(movie.id)
+       // debugPrint(movie.id)
         
         self.progressView.stopAnimation(self)
       
@@ -112,7 +122,8 @@ extension MovieDetailViewController {
         self.movieTitle = movie.title
         
         // Movie Overview
-        self.movieOverview = "SYNOPSIS :" + "\n" + movie.overview
+        self.movieOverview = "SYNOPSIS :" + "\n\n" + movie.overview
+        self.customFont = NSFont.systemCustomFontOfSize(size: 16.0)
         
         // Movie Release Date
         self.movieReleaseDate = movie.releaseDate
@@ -120,8 +131,9 @@ extension MovieDetailViewController {
         // Movie HomePage
         if !movie.homePage.isEmpty, let homePageURL = URL(string: movie.homePage) {
             homePageLabel.attributedStringValue = NSAttributedString.hyperlinkFromString(string: movie.homePage, url: homePageURL)
+            self.homePageLabelHidding = false
         } else {
-            homePageLabel.stringValue = ""
+            self.homePageLabelHidding = true
         }
         
         // Movie Genres
@@ -132,30 +144,35 @@ extension MovieDetailViewController {
         }
         self.movieGenres = tt.joined(separator: ", ")
         
+        // Movie Vote Count
+        self.movieVoteCount = movie.voteAverage
+        
+        // Movie Rating
+        ratingLevelIndicator.maxValue = Double(round(movie.voteAverage.floatValue))
+        ratingLevelIndicator.minValue = Double(0)
+        ratingLevelIndicator.floatValue = movie.voteAverage.floatValue
+        
     }
 }
 
 // MARK: - APIControllerProtocol
 extension MovieDetailViewController: APIControllerProtocol {
-    
-    func didReceiveAPIResults(backgroundPath: String) {
-        Alamofire.request(backgroundPath).validate().responseImage { (dataResponse: DataResponse<Image>) in
-            
-            guard dataResponse.result.isSuccess else {
-                debugPrint("Error fetching movie image: \(dataResponse.result.error)")
-                return
-            }
-            
-            if let image = dataResponse.result.value {
-                let image = image.resize(toSize: self.view.frame.size)
-                self.backgroundImageView.image = image
-                self.isHiding = false
-            }
+    func didReceive(backgroundImage: NSImage?) {
+        
+        if let image = backgroundImage?.resize(toSize: view.frame.size) {
+            self.backgroundImageView.image = image
+            self.isHiding = false
         }
     }
 }
 
-
+// MARK: - ClickableTextFieldDelegate
+extension MovieDetailViewController: ClickableTextFieldDelegate {
+    func textFieldClicked(textField: HyperlinkTextField) {
+        guard let movieHomePageURL = URL(string: textField.stringValue) else { return }
+        _ = try? NSWorkspace.shared().open(movieHomePageURL, options: .default, configuration: [:])
+    }
+}
 
 
 

@@ -31,6 +31,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AlwynNew-Md.otf</string>
+		<string>AlwynNew-Rg.otf</string>
+		<string>AlwynNew-Lt.otf</string>
+	</array>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>

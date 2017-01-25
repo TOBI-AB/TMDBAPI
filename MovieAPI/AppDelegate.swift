@@ -20,9 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.newt?.listener = { status in
             print("Network Status Changed: \(status)")
             switch status {
-            case .notReachable: debugPrint("no conn")
+            case .notReachable: break
             //Show error state
-            case .reachable(_), .unknown: debugPrint("cnn unk")
+            case .reachable(_), .unknown: break
                 //Hide error state
             }
         }

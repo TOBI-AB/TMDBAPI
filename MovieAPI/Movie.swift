@@ -14,11 +14,11 @@ class TMDBMovie: NSObject {
     
     dynamic var image = NSImage()
     
-    lazy var posterURL: String = {
+    lazy var posterURLString: String = {
         [unowned self] in
         let path = API.imageBaseURL.appending(self.posterPath)
         return path
-        }()
+    }()
     
     
     var posterPath = String()
@@ -45,7 +45,7 @@ class TMDBMovie: NSObject {
         self.voteCount    = dict["vote_count"] as? NSNumber ?? NSNumber()
         self.voteAverage  = dict["vote_average"] as? NSNumber ?? NSNumber()*/
         
-        self.getMovieImage(posterURL)
+        self.getMovieImage(posterURLString)
     }
     
     // Fetch movie poster image

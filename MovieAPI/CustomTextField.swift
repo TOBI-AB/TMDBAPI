@@ -8,17 +8,21 @@
 
 import Cocoa
 
+protocol ClickableTextFieldDelegate {
+    func textFieldClicked(textField: HyperlinkTextField)
+}
+
 class HyperlinkTextField: NSTextField {
+    
+    var clickableTextFieldDelegate: ClickableTextFieldDelegate? = nil
 
     override func resetCursorRects() {
         self.addCursorRect(self.bounds, cursor: NSCursor.pointingHand())
     }
     
     override func mouseDown(with event: NSEvent) {
-       
-        
+        self.clickableTextFieldDelegate?.textFieldClicked(textField: self)
     }
-    
 }
 
 

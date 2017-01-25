@@ -82,13 +82,22 @@ extension NSAttributedString {
         attrString.fixAttributes(in: range)
         attrString.fixFontAttribute(in: range)
         attrString.endEditing()
-        debugPrint(attrString)
         return attrString
     }
 }
 
 
-
+extension NSFont {
+    class func systemCustomFontOfSize(size: CGFloat) -> NSFont {
+        return NSFont(name: "AlwynNew-Regular", size: size) ?? NSFont.systemFont(ofSize: size)
+    }
+    func lightSystemFontOfSize(size: CGFloat) -> NSFont {
+        return NSFont(name: "AlwynNew-Light", size: size) ?? NSFont.systemFont(ofSize: size)
+    }
+    func boldSystemCustomFontOfSize(size: CGFloat) -> NSFont {
+        return NSFont(name: "AlwynNew-Medium", size: size) ?? NSFont.boldSystemFont(ofSize: size)
+    }
+}
 
 
 

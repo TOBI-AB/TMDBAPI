@@ -32,10 +32,13 @@ class ViewController: NSViewController {
     
     // MARK: Fetching & Parsing Movie Data
     fileprivate func fetchMoviesAtPage(_ page: Int) {
-        
+        //, "sort_by": "popularity.desc"
         let parameters = ["api_key": API.key, "page": page, "sort_by": "popularity.desc"] as [String: Any]
         let basicURL = API.APIbaseURL.appending(Path.discover.rawValue)
-        guard let requestURLString = URLComponents.urlWithParameters(basicURL, parameters) else { return }
+        guard let requestURLString = URLComponents.urlWithParameters(basicURL, parameters) else {
+            debugPrint("Invalid Request URL")
+            return
+        }
         var tempArray = [TMDBMovie]()
 
         NetworkServer.shared.fetchAPIData(requestURLString) { [unowned self] (response: URLResponse?, data: Any?, error: Error?) in
