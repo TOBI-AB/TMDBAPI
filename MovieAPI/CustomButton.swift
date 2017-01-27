@@ -30,7 +30,7 @@ class CustomButton: NSButton {
     }
     override func updateLayer() {
        // self.layer?.cornerRadius = 5.0
-        self.layer?.borderColor = NSColor.cadmiumOrange.cgColor
+        self.layer?.borderColor = NSColor.galliano.cgColor
         self.layer?.borderWidth = 1.5
        //NSColor(white: 0.2, alpha: 0.5).cgColor
         

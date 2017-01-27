@@ -22,6 +22,7 @@ class TMDBMovieDetail: NSObject {
     var genres              = [NSDictionary]()
     var homePage            = String()
     var id                  = NSNumber()
+    var imdbID              = String()
     var overview            = String()
     var proudctionCompanies = [NSDictionary]()
     var productionCountries = [NSDictionary]()
@@ -54,6 +55,7 @@ class TMDBMovieDetail: NSObject {
         self.genres = dict["genres"] as? [NSDictionary] ?? [NSDictionary]()
         self.homePage = dict["homepage"] as? String ?? ""
         self.id       = dict["id"] as? NSNumber ?? NSNumber()
+        self.imdbID   = dict["imdb_id"] as? String ?? String()
         self.overview = dict["overview"] as? String ?? ""
         self.proudctionCompanies    = dict["production_companies"] as? [NSDictionary] ?? [NSDictionary]()
         self.productionCountries = dict["production_countries"] as? [NSDictionary] ?? [NSDictionary]()
@@ -79,7 +81,7 @@ class TMDBMovieDetail: NSObject {
         
         NetworkServer.shared.fetchAPIData(requestURL) { (response: URLResponse?, data: Any?, error: Error?) in
             guard (error == nil) else {
-                debugPrint("error --> back movie: \(error?.localizedDescription)")
+                debugPrint("error --> back movie: \(String(describing: error?.localizedDescription))")
                 return
             }
             
@@ -108,7 +110,7 @@ class TMDBMovieDetail: NSObject {
         Alamofire.request(backgroundURLString).validate().responseImage { (dataResponse: DataResponse<Image>) in
             
             guard dataResponse.result.isSuccess else {
-                debugPrint("Error fetching movie image: \(dataResponse.result.error)")
+                debugPrint("Error fetching movie image: \(String(describing: dataResponse.result.error))")
                 return
             }
             

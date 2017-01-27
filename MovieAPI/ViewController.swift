@@ -22,7 +22,6 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         fetchMoviesAtPage(self.page)
         setupCollectionView()
-        self.view.window?.delegate = self
     }
     
     override func viewDidAppear() {
@@ -32,19 +31,20 @@ class ViewController: NSViewController {
     
     // MARK: Fetching & Parsing Movie Data
     fileprivate func fetchMoviesAtPage(_ page: Int) {
-        //, "sort_by": "popularity.desc"
         let parameters = ["api_key": API.key, "page": page, "sort_by": "popularity.desc"] as [String: Any]
         let basicURL = API.APIbaseURL.appending(Path.discover.rawValue)
+
         guard let requestURLString = URLComponents.urlWithParameters(basicURL, parameters) else {
             debugPrint("Invalid Request URL")
             return
         }
         var tempArray = [TMDBMovie]()
 
+        // Network staff
         NetworkServer.shared.fetchAPIData(requestURLString) { [unowned self] (response: URLResponse?, data: Any?, error: Error?) in
             
             guard error == nil else {
-                debugPrint("\(error?.localizedDescription)")
+                debugPrint("\(String(describing: error?.localizedDescription))")
                 return
             }
             guard let data = data as? Data else {
@@ -70,13 +70,6 @@ class ViewController: NSViewController {
     
 }
 
-extension ViewController: NSWindowDelegate {
-    func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
-        
-        self.fetchMoviesAtPage(self.page)
-        return frameSize
-    }
-}
 
 // MARK: - CollectionView Datasource
 extension ViewController: NSCollectionViewDataSource {

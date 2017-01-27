@@ -64,6 +64,10 @@ extension NSColor {
     class var cadmiumOrange: NSColor {
         return NSColor(r: 248, g: 134, b: 45, a: 1)
     }
+    
+    class var galliano: NSColor {
+        return NSColor(calibratedRed:0.84, green:0.65, blue:0.05, alpha:1.00)
+    }
 }
 
 extension NSAttributedString {
@@ -76,7 +80,7 @@ extension NSAttributedString {
         // stack URL
         attrString.addAttribute(NSCursorAttributeName, value: NSCursor.arrow(), range: range)
         // stack text color
-        attrString.addAttribute(NSForegroundColorAttributeName, value: NSColor.cadmiumOrange, range: range)
+        attrString.addAttribute(NSForegroundColorAttributeName, value: NSColor.galliano, range: range)
         attrString.addAttribute(NSFontAttributeName, value: NSFont.init(name: "AvenirNext-Regular", size: 15.0) ?? NSFont(), range: range)
         attrString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: Int32(NSUnderlineStyle.styleSingle.rawValue)), range: range)
         attrString.fixAttributes(in: range)
@@ -91,10 +95,10 @@ extension NSFont {
     class func systemCustomFontOfSize(size: CGFloat) -> NSFont {
         return NSFont(name: "AlwynNew-Regular", size: size) ?? NSFont.systemFont(ofSize: size)
     }
-    func lightSystemFontOfSize(size: CGFloat) -> NSFont {
+    class func lightSystemFontOfSize(size: CGFloat) -> NSFont {
         return NSFont(name: "AlwynNew-Light", size: size) ?? NSFont.systemFont(ofSize: size)
     }
-    func boldSystemCustomFontOfSize(size: CGFloat) -> NSFont {
+    class func boldSystemCustomFontOfSize(size: CGFloat) -> NSFont {
         return NSFont(name: "AlwynNew-Medium", size: size) ?? NSFont.boldSystemFont(ofSize: size)
     }
 }

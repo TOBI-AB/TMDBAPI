@@ -54,7 +54,7 @@ class TMDBMovie: NSObject {
         Alamofire.request(imageURLString).validate().responseImage { (dataResponse: DataResponse<Image>) in
             
             guard dataResponse.result.isSuccess else {
-                debugPrint("Error fetching movie image: \(dataResponse.result.error)")
+                debugPrint("Error fetching movie image: \(String(describing: dataResponse.result.error))")
                 return
             }
             

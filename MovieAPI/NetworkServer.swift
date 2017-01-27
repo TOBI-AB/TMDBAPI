@@ -37,7 +37,7 @@ class NetworkServer: NSObject {
             }
             
             guard let requestResponse = (response as? HTTPURLResponse), 200..<299 ~= requestResponse.statusCode else {
-                debugPrint("Status code: \( (response as? HTTPURLResponse)?.statusCode)")
+                debugPrint("Status code: \(String(describing:  (response as? HTTPURLResponse)?.statusCode))")
                 return
             }
             

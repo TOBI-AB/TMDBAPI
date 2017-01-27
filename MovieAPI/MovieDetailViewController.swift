@@ -10,6 +10,7 @@ import Cocoa
 import Alamofire
 import AlamofireImage
 
+
 class MovieDetailViewController: NSViewController {
     
     @IBOutlet weak var customView: NSView!
@@ -18,29 +19,33 @@ class MovieDetailViewController: NSViewController {
     @IBOutlet weak var progressView: NSProgressIndicator!
     @IBOutlet weak var ratingLevelIndicator: NSLevelIndicator!
     @IBOutlet weak var homePageLabel: HyperlinkTextField!
+    @IBOutlet weak var movieOverviewLabel: NSTextField!
+    @IBOutlet weak var voteLabel: NSTextField!
     
-    dynamic var ratingValue = NSNumber()
+    
     
     // MARK: - Properties
-    var movieDetail: TMDBMovieDetail?
 
     dynamic var movieTitle: String?
-    dynamic var movieOverview: String?
     dynamic var movieGenres: String?
     dynamic var movieHomePage: String?
     dynamic var movieReleaseDate: String?
-    dynamic var movieVoteCount: NSNumber?
-    dynamic var customFont: NSFont?
+    dynamic var movieVoteAverage: String?
+    dynamic var movieVoteCount: String?
     dynamic var isHiding = true
     dynamic var homePageLabelHidding = false
     dynamic var cadmiumOrangeColor = NSColor.cadmiumOrange
+    dynamic var gallianoColor      = NSColor.galliano
     
-    // New selected Movie
-    var selectedMovie: TMDBMovieDetail? {
+    lazy var movieID = NSNumber()
+
+    var movieDetail: TMDBMovieDetail? {
         didSet {
-            if let movie = selectedMovie {
+            if let movie = movieDetail {
                 OperationQueue.main.addOperation {
                     self.updatView(movie)
+                    self.movieID = movie.id
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MovieID"), object: nil, userInfo: ["movieID": movie.id])
                 }
             }
         }
@@ -67,6 +72,7 @@ class MovieDetailViewController: NSViewController {
         // Make MovieDetailViewController Delegate to Homepagelabel to handle homepage URLS
         self.homePageLabel.clickableTextFieldDelegate = self
         
+       
     }
     
     // MARK: - View Life Cycle
@@ -78,101 +84,36 @@ class MovieDetailViewController: NSViewController {
     override var representedObject: Any? {
         didSet {
             if let movie = representedObject as? TMDBMovie {
+                self.movieID = movie.id
                 self.getMovieDetail(movie.id)
                 self.posterImageView.image = movie.image
-            }
-        }
-    }
-}
 
-
-// MARK: - Helpers
-extension MovieDetailViewController {
-    ///movie/{movie_id}
-    
-    func getMovieDetail(_ movieID: NSNumber) {
-        
-        let baseURLString = API.APIbaseURL.appending(Path.detail.rawValue.replacingOccurrences(of: "{movie_id}", with: "\(movieID)"))
-        let parameters = ["api_key": API.key, "language":movieLanguage.en] as [String : Any]
-        
-        guard let url = URLComponents.urlWithParameters(baseURLString, parameters) else {
-            debugPrint("Invalid Movie Detail URL")
-            return
-        }
-        NetworkServer.shared.fetchAPIData(url) { [unowned self] (response: URLResponse?, data: Any?, error: Error?) in
-            guard error == nil else {
-                debugPrint("\(error?.localizedDescription)")
-                return
             }
-            guard let json = try? JSONSerialization.jsonObject(with: (data as? Data ?? Data()), options: []) as? NSDictionary else {
-                return
-            }
-            self.selectedMovie = TMDBMovieDetail(dict: json ?? NSDictionary(), delegate: self)
         }
     }
     
-    // Update View
-    fileprivate func updatView(_ movie: TMDBMovieDetail) {
-       // debugPrint(movie.id)
+    // Show more details in IMDB
+    @IBAction func imdbDetailClicked(_ sender: CustomButton) {
         
-        self.progressView.stopAnimation(self)
-      
-        // Movie Title
-        self.view.window?.title = movie.title
-        self.movieTitle = movie.title
-        
-        // Movie Overview
-        self.movieOverview = "SYNOPSIS :" + "\n\n" + movie.overview
-        self.customFont = NSFont.systemCustomFontOfSize(size: 16.0)
-        
-        // Movie Release Date
-        self.movieReleaseDate = movie.releaseDate
-        
-        // Movie HomePage
-        if !movie.homePage.isEmpty, let homePageURL = URL(string: movie.homePage) {
-            homePageLabel.attributedStringValue = NSAttributedString.hyperlinkFromString(string: movie.homePage, url: homePageURL)
-            self.homePageLabelHidding = false
-        } else {
-            self.homePageLabelHidding = true
+        if let movieDetail = self.movieDetail, let imdbURL = URL(string: Path.imdb.rawValue) {
+            let url = imdbURL.appendingPathComponent(movieDetail.imdbID)
+            _ = try? NSWorkspace.shared().open(url, options: .default, configuration: [:])
         }
-        
-        // Movie Genres
-        var tt = [String]()
-        tt = movie.genres.enumerated().map {(key, dict) in
-            let rr = String()
-            return (rr + (dict["name"] as? String ?? ""))
-        }
-        self.movieGenres = tt.joined(separator: ", ")
-        
-        // Movie Vote Count
-        self.movieVoteCount = movie.voteAverage
-        
-        // Movie Rating
-        ratingLevelIndicator.maxValue = Double(round(movie.voteAverage.floatValue))
-        ratingLevelIndicator.minValue = Double(0)
-        ratingLevelIndicator.floatValue = movie.voteAverage.floatValue
-        
     }
+    
+    @IBAction func showTraillerViewController(_ sender: CustomButton) {
+        
+        if let videosViewCotroller = storyboard?.instantiateController(withIdentifier: "VideoMovieVC") as? MovieVideosViewController {
+            videosViewCotroller.representedObject = self.representedObject
+            self.presentViewController(videosViewCotroller, animator: Animator())
+            
+        }
+    }
+    
 }
 
-// MARK: - APIControllerProtocol
-extension MovieDetailViewController: APIControllerProtocol {
-    func didReceive(backgroundImage: NSImage?) {
-        
-        if let image = backgroundImage?.resize(toSize: view.frame.size) {
-            self.backgroundImageView.image = image
-            self.isHiding = false
-        }
-    }
-}
 
-// MARK: - ClickableTextFieldDelegate
-extension MovieDetailViewController: ClickableTextFieldDelegate {
-    func textFieldClicked(textField: HyperlinkTextField) {
-        guard let movieHomePageURL = URL(string: textField.stringValue) else { return }
-        _ = try? NSWorkspace.shared().open(movieHomePageURL, options: .default, configuration: [:])
-    }
-}
+
 
 
 
