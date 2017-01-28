@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E144f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12100" systemVersion="16E144f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12100"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -665,7 +665,7 @@
         <!--Window Controller-->
         <scene sceneID="Nds-XZ-aHW">
             <objects>
-                <windowController storyboardIdentifier="DetailWindow" id="gO2-tx-mhs" customClass="WindowController" customModule="MovieAPI" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="DetailWindow" id="gO2-tx-mhs" customClass="MovieDetailWindowController" customModule="MovieAPI" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Movie Detail" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="NMh-qQ-dUO">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -698,16 +698,16 @@
                                     <rect key="frame" x="1" y="1" width="784" height="742"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cib-1A-a5A">
-                                            <rect key="frame" x="270" y="540" width="494" height="192"/>
+                                        <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cib-1A-a5A">
+                                            <rect key="frame" x="20" y="464" width="744" height="258"/>
                                             <subviews>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7s1-2R-fCL">
-                                                    <rect key="frame" x="0.0" y="54" width="97" height="138"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7s1-2R-fCL">
+                                                    <rect key="frame" x="314.5" y="54" width="115" height="204"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="746" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="840-TU-ChP">
-                                                            <rect key="frame" x="-2" y="75" width="101" height="63"/>
+                                                            <rect key="frame" x="-2" y="130" width="119" height="74"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" placeholderString="" id="Lqk-Kp-gvA">
-                                                                <font key="font" size="38" name="AvenirNext-DemiBold"/>
+                                                                <font key="font" size="45" name="AvenirNext-DemiBold"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <color key="backgroundColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -717,9 +717,9 @@
                                                             </connections>
                                                         </textField>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vud-Il-6av">
-                                                            <rect key="frame" x="-2" y="50" width="42" height="25"/>
+                                                            <rect key="frame" x="35" y="98" width="45" height="27"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" placeholderString="" id="e8W-mN-oS4">
-                                                                <font key="font" size="15" name="AvenirNext-Regular"/>
+                                                                <font key="font" size="16" name="AvenirNext-Medium"/>
                                                                 <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -728,7 +728,7 @@
                                                             </connections>
                                                         </textField>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNV-wl-Zoj">
-                                                            <rect key="frame" x="-2" y="25" width="42" height="25"/>
+                                                            <rect key="frame" x="36.5" y="68" width="42" height="25"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="ycA-Ci-0WQ">
                                                                 <font key="font" size="15" name="AvenirNext-Regular"/>
                                                                 <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -739,7 +739,7 @@
                                                             </connections>
                                                         </textField>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Lh-mt-QKq" customClass="HyperlinkTextField" customModule="MovieAPI" customModuleProvider="target">
-                                                            <rect key="frame" x="-2" y="0.0" width="42" height="25"/>
+                                                            <rect key="frame" x="36.5" y="38" width="42" height="25"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="Label" allowsEditingTextAttributes="YES" id="knS-L8-eE0">
                                                                 <font key="font" size="15" name="AvenirNext-Regular"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -749,8 +749,21 @@
                                                                 <binding destination="ygs-an-Yfi" name="hidden" keyPath="self.homePageLabelHidding" id="ft2-wx-j5E"/>
                                                             </connections>
                                                         </textField>
+                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pL3-2V-P6D">
+                                                            <rect key="frame" x="29" y="0.0" width="57" height="33"/>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Testtt" id="hjx-co-Mrn">
+                                                                <font key="font" size="20" name="AvenirNext-Medium"/>
+                                                                <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                            <connections>
+                                                                <binding destination="ygs-an-Yfi" name="textColor" keyPath="self.gallianoColor" id="pOX-R8-ucc"/>
+                                                                <binding destination="ygs-an-Yfi" name="value" keyPath="self.movieVoteAverage" id="qrh-AS-wCx"/>
+                                                            </connections>
+                                                        </textField>
                                                     </subviews>
                                                     <visibilityPriorities>
+                                                        <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
@@ -761,13 +774,14 @@
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hJ-rK-aw1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="494" height="29"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hJ-rK-aw1">
+                                                    <rect key="frame" x="20" y="0.0" width="704" height="29"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xCA-RD-ttB">
-                                                            <rect key="frame" x="-2" y="0.0" width="493" height="29"/>
+                                                            <rect key="frame" x="3" y="0.0" width="698" height="29"/>
                                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Multiline Label" id="pKA-hT-P6E">
                                                                 <font key="font" size="17" name="AvenirNext-Regular"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -790,7 +804,8 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="2hJ-rK-aw1" secondAttribute="trailing" id="dvV-K5-F2K"/>
+                                                <constraint firstAttribute="trailing" secondItem="2hJ-rK-aw1" secondAttribute="trailing" constant="20" symbolic="YES" id="Cng-BO-iRp"/>
+                                                <constraint firstItem="2hJ-rK-aw1" firstAttribute="leading" secondItem="cib-1A-a5A" secondAttribute="leading" constant="20" symbolic="YES" id="ZRD-9M-l9Y"/>
                                             </constraints>
                                             <visibilityPriorities>
                                                 <integer value="1000"/>
@@ -804,19 +819,9 @@
                                                 <binding destination="ygs-an-Yfi" name="hidden" keyPath="self.isHiding" id="hyl-xE-zn7"/>
                                             </connections>
                                         </stackView>
-                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ULJ-5Y-uvY">
-                                            <rect key="frame" x="10" y="372" width="240" height="360"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="240" id="HY9-5c-CdH"/>
-                                                <constraint firstAttribute="height" constant="360" id="SBI-uN-nZs"/>
-                                            </constraints>
-                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="06d-6H-4QI"/>
-                                            <connections>
-                                                <binding destination="ygs-an-Yfi" name="hidden" keyPath="self.isHiding" id="o8U-BC-TuW"/>
-                                            </connections>
-                                        </imageView>
-                                        <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ya8-nF-B5f">
-                                            <rect key="frame" x="270" y="377" width="242" height="21"/>
+                                        <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ya8-nF-B5f">
+                                            <rect key="frame" x="165" y="273" width="242" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WGN-WN-sdJ" customClass="CustomButton" customModule="MovieAPI" customModuleProvider="target">
                                                     <rect key="frame" x="-6" y="-7" width="124" height="32"/>
@@ -862,31 +867,22 @@
                                                 </binding>
                                             </connections>
                                         </progressIndicator>
-                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pL3-2V-P6D">
-                                            <rect key="frame" x="101.5" y="329" width="57" height="33"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Testtt" id="hjx-co-Mrn">
-                                                <font key="font" size="20" name="AvenirNext-Medium"/>
-                                                <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULJ-5Y-uvY">
+                                            <rect key="frame" x="20" y="20" width="200" height="300"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="06d-6H-4QI"/>
                                             <connections>
-                                                <binding destination="ygs-an-Yfi" name="textColor" keyPath="self.gallianoColor" id="pOX-R8-ucc"/>
-                                                <binding destination="ygs-an-Yfi" name="value" keyPath="self.movieVoteAverage" id="qrh-AS-wCx"/>
+                                                <binding destination="ygs-an-Yfi" name="hidden" keyPath="self.isHiding" id="o8U-BC-TuW"/>
                                             </connections>
-                                        </textField>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="cib-1A-a5A" firstAttribute="top" secondItem="Nye-CC-82G" secondAttribute="top" constant="10" id="1bV-ju-LhK"/>
+                                        <constraint firstItem="cib-1A-a5A" firstAttribute="leading" secondItem="Nye-CC-82G" secondAttribute="leading" constant="20" symbolic="YES" id="1il-Ua-sxt"/>
+                                        <constraint firstItem="cib-1A-a5A" firstAttribute="centerX" secondItem="Nye-CC-82G" secondAttribute="centerX" id="34a-VO-VOU"/>
                                         <constraint firstItem="h6Y-ZI-DlF" firstAttribute="centerY" secondItem="Nye-CC-82G" secondAttribute="centerY" id="3Tt-Nv-JBN"/>
-                                        <constraint firstItem="cib-1A-a5A" firstAttribute="leading" secondItem="ULJ-5Y-uvY" secondAttribute="trailing" constant="20" id="Fhf-2a-aeh"/>
-                                        <constraint firstItem="ULJ-5Y-uvY" firstAttribute="top" secondItem="Nye-CC-82G" secondAttribute="top" constant="10" id="RWE-Lt-tab"/>
-                                        <constraint firstItem="ya8-nF-B5f" firstAttribute="bottom" secondItem="ULJ-5Y-uvY" secondAttribute="bottom" constant="-5" id="TNO-7W-X05"/>
-                                        <constraint firstItem="pL3-2V-P6D" firstAttribute="top" secondItem="ULJ-5Y-uvY" secondAttribute="bottom" constant="10" id="UPk-ic-20e"/>
-                                        <constraint firstItem="ya8-nF-B5f" firstAttribute="leading" secondItem="cib-1A-a5A" secondAttribute="leading" id="aAW-1U-0FI"/>
-                                        <constraint firstItem="ULJ-5Y-uvY" firstAttribute="leading" secondItem="Nye-CC-82G" secondAttribute="leading" constant="10" id="ehJ-kD-blD"/>
-                                        <constraint firstItem="pL3-2V-P6D" firstAttribute="centerX" secondItem="ULJ-5Y-uvY" secondAttribute="centerX" id="jer-JH-lFT"/>
+                                        <constraint firstAttribute="trailing" secondItem="cib-1A-a5A" secondAttribute="trailing" constant="20" symbolic="YES" id="P0Y-wy-lFw"/>
+                                        <constraint firstItem="cib-1A-a5A" firstAttribute="top" secondItem="Nye-CC-82G" secondAttribute="top" constant="20" id="bdA-8E-VDk"/>
                                         <constraint firstItem="h6Y-ZI-DlF" firstAttribute="centerX" secondItem="Nye-CC-82G" secondAttribute="centerX" id="lqQ-rX-VsB"/>
-                                        <constraint firstAttribute="trailing" secondItem="cib-1A-a5A" secondAttribute="trailing" constant="20" id="wVu-mc-CGr"/>
                                     </constraints>
                                 </view>
                             </box>
@@ -919,7 +915,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="MovieAPI" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="MovieWindowController" customModule="MovieAPI" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Movies" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>

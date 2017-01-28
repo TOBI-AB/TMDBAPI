@@ -10,6 +10,7 @@ import Foundation
 import Cocoa
 
 // MARK: - Enums
+
 enum ImageResolution {
     case w500
     case w1280
@@ -32,25 +33,18 @@ enum movieLanguage: String {
     case en = "en-US"
 }
 
-enum AlwynNewFont: String {
+enum CustomFonts {
+    enum AlwynNewFont: String {
+        case medium  = "AlwynNew-Medium"
+        case regular = "AlwynNew-Regular"
+        case light   = "AlwynNew-Light"
+    }
     
-    case Medium  = "AlwynNew-Medium"
-    case Regular = "AlwynNew-Regular"
-    case Light   = "AlwynNew-Light"
-    
-    var fontType: NSFont {
-        
-        switch self {
-        case .Medium:
-            return NSFont(name: self.rawValue, size: 17.0) ?? NSFont.boldSystemFont(ofSize: 16.0)
-        case .Regular:
-            return NSFont(name: self.rawValue, size: 15.0) ?? NSFont.systemFont(ofSize: 15.0)
-        case .Light:
-            return NSFont(name: self.rawValue, size: 13.0) ?? NSFont.systemFont(ofSize: 13.0)
-        }
+    enum AvenirNext: String {
+        case medium  = "AvenirNext-Medium"
+        case regular = "AvenirNext-Regular"
     }
 }
-
 
 // MARK: - Structs
 struct API {

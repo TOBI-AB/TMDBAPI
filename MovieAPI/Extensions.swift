@@ -8,6 +8,7 @@
 
 import Cocoa
 
+// MARK: - URLComponents
 extension URLComponents {
     
     static func urlWithParameters( _ url: String, _ parameters: [String: Any]) -> URL! {
@@ -27,6 +28,7 @@ extension URLComponents {
     }
 }
 
+// MARK: - NSImage
 extension NSImage {
     
     func resize(toSize size: NSSize) -> NSImage? {
@@ -47,6 +49,7 @@ extension NSImage {
     }
 }
 
+// MARK: - NSColor
 extension NSColor {
     
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
@@ -70,6 +73,7 @@ extension NSColor {
     }
 }
 
+// MARK: - NSAttributedString
 extension NSAttributedString {
     
     static func hyperlinkFromString(string:String, url:URL) -> NSAttributedString {
@@ -90,16 +94,16 @@ extension NSAttributedString {
     }
 }
 
-
+// MARK: - NSFont
 extension NSFont {
     class func systemCustomFontOfSize(size: CGFloat) -> NSFont {
-        return NSFont(name: "AlwynNew-Regular", size: size) ?? NSFont.systemFont(ofSize: size)
+        return NSFont(name: "AvenirNext-Regular", size: size) ?? NSFont.systemFont(ofSize: size)
     }
     class func lightSystemFontOfSize(size: CGFloat) -> NSFont {
-        return NSFont(name: "AlwynNew-Light", size: size) ?? NSFont.systemFont(ofSize: size)
+        return NSFont(name: "AvenirNext-Light", size: size) ?? NSFont.systemFont(ofSize: size)
     }
     class func boldSystemCustomFontOfSize(size: CGFloat) -> NSFont {
-        return NSFont(name: "AlwynNew-Medium", size: size) ?? NSFont.boldSystemFont(ofSize: size)
+        return NSFont(name: "AvenirNext-Medium", size: size) ?? NSFont.boldSystemFont(ofSize: size)
     }
 }
 
